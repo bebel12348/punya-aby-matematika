@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Game Matematika</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#222;
+color:white;
+padding:40px;
+}
+
+#game{
+background:#333;
+padding:30px;
+border-radius:10px;
+display:inline-block;
+}
+
+input{
+padding:10px;
+font-size:18px;
+width:100px;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+margin:10px;
+cursor:pointer;
+}
+
+#question{
+font-size:28px;
+margin:20px;
+}
+
+#level{
+font-size:20px;
+color:yellow;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🧠 Game Matematika</h1>
+
+<div id="game">
+
+<div id="level">Level 1</div>
+
+<div id="question"></div>
+
+<input type="number" id="answer">
+
+<br>
+
+<button onclick="checkAnswer()">Jawab</button>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+
+let level = 1
+let correctAnswer
+
+function generateQuestion(){
+
+let a = Math.floor(Math.random()*10)+1
+let b = Math.floor(Math.random()*10)+1
+
+if(level==1){
+correctAnswer = a + b
+document.getElementById("question").innerHTML = a + " + " + b
+}
+
+else if(level==2){
+correctAnswer = a - b
+document.getElementById("question").innerHTML = a + " - " + b
+}
+
+else if(level==3){
+correctAnswer = a * b
+document.getElementById("question").innerHTML = a + " × " + b
+}
+
+else{
+correctAnswer = (a + b) * 2
+document.getElementById("question").innerHTML = "(" + a + "+" + b + ") × 2"
+}
+
+}
+
+function checkAnswer(){
+
+let userAnswer = document.getElementById("answer").value
+
+if(userAnswer == correctAnswer){
+
+document.getElementById("message").innerHTML="✅ Benar!"
+
+level++
+
+if(level>4){
+document.getElementById("message").innerHTML="🏆 Kamu Menang!"
+return
+}
+
+document.getElementById("level").innerHTML="Level "+level
+
+generateQuestion()
+
+}
+
+else{
+document.getElementById("message").innerHTML="❌ Salah, coba lagi!"
+}
+
+document.getElementById("answer").value=""
+
+}
+
+generateQuestion()
+
+</script>
+
+</body>
+</html>
